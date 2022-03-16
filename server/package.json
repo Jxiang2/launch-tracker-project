@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "jest",
+    "test-watch": "jest --watch",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc -p ."
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.19",
     "jest": "^27.5.1",

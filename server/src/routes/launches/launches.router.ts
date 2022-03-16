@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { httpAddNewLaunch, httpGetAllLaunches, httpAbortLaunch } from "./lauches.controller";
+import { httpAddNewLaunch, httpGetAllLaunches, httpAbortLaunch } from "./launches.controller";
 
 const launchRouter: Router = express.Router();
 
