@@ -6,7 +6,7 @@ import { Planet } from "../interfaces/Planets";
 
 const results: Planet[] = [];
 
-const isHabitablePlanet = <T extends Planet> (planet: T) => {
+function isHabitablePlanet<T extends Planet> (planet: T) {
 	return (
 		planet["koi_disposition"] === "CONFIRMED" &&
 		planet["koi_insol"] > 0.36 &&
@@ -15,7 +15,7 @@ const isHabitablePlanet = <T extends Planet> (planet: T) => {
 	);
 };
 
-const loadPlanetData = () => {
+function loadPlanetData () {
 	return new Promise((resolve, reject) => {
 		const data: Parser = fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
 			.pipe(
