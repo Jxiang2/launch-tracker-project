@@ -9,7 +9,7 @@
     "install-all": "npm run install-server && npm run install-client",
     "dev": "npm run dev --prefix server & npm start --prefix client",
     "deploy": "npm run build --prefix client && npm run build --prefix server && npm start --prefix server",
-    "test-watch": "npm run test-watch --prefix server"
+    "test": "npm test --prefix server"
   },
   "keywords": [],
   "author": "",
