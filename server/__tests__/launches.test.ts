@@ -1,10 +1,10 @@
-import { app } from "../../app";
-import supertest from "supertest";
+import { app } from "../src/app";
+import request from "supertest";
 
 
 describe('Test GET /launches', () => {
     test('It should respond with 200 success', async () => {
-        const response = await supertest(app).get('/launches');
+        const response = await request(app).get('/launches');
         expect(response.statusCode).toBe(200);
     });
 });
