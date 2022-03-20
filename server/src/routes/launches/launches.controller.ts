@@ -1,5 +1,5 @@
 import { LaunchInput } from "../../interfaces/Launches";
-import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/lauches.model";
+import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/launches.model";
 import { Request, Response } from "express";
 
 function httpGetAllLaunches (req: Request, res: Response) {

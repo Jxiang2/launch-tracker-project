@@ -22,10 +22,8 @@ const startServer = async () => {
 // setup mongoose listeners
 mongoose.connection.once('open', () => console.log('MongoDB connection ready'));
 mongoose.connection.on('error', (err) => console.error(err));
-startServer();
 
-// MongoDB Credentials
-// nasa-api
-// wWerad8lEAXOUeT7
+// start server
+startServer();
 
 
