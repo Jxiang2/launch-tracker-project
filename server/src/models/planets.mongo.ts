@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Planet } from "../interfaces/Planets";
 
-const planetSchema = new mongoose.Schema({
+const planetSchema = new mongoose.Schema<Planet>({
     keplerName: {
         type: String,
         required: true
