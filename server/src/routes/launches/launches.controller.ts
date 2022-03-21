@@ -2,8 +2,9 @@ import { LaunchInput } from "../../interfaces/Launches";
 import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/launches.model";
 import { Request, Response } from "express";
 
-function httpGetAllLaunches (req: Request, res: Response) {
-    return res.status(200).json(getAllLaunches());
+async function httpGetAllLaunches (req: Request, res: Response) {
+    const launches = await getAllLaunches();
+    return res.status(200).json(launches);
 };
 
 function httpAddNewLaunch (req: Request, res: Response) {
