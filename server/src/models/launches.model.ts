@@ -32,9 +32,8 @@ async function getLatestFlightNumber () {
         .findOne()
         .sort("-flightNumber");
 
-    if (!latestLaunch) {
+    if (!latestLaunch)
         return DEFAULT_FLIGHT_NUMBER;
-    }
 
     return latestLaunch.flightNumber;
 }
@@ -54,17 +53,18 @@ async function saveLaunch (launch: Launch) {
     });
 }
 
-function addNewLaunch (launchInput: LaunchInput) {
-    LAST_FLIGHT_NUMBER++;
-    launches.set(LAST_FLIGHT_NUMBER,
-        {
-            ...launchInput,
-            flightNumber: LAST_FLIGHT_NUMBER,
-            upcoming: true,
-            customers: ["ZTM", "NASA"],
-            success: true
-        }
-    );
+async function addNewLaunch (launchInput: LaunchInput) {
+    const newFlightNumber = await getLatestFlightNumber() + 1;
+
+    const newLaunch = {
+        ...launchInput,
+        flightNumber: newFlightNumber,
+        upcoming: true,
+        customers: ["ZTM", "NASA"],
+        success: true
+    };
+
+    await saveLaunch(newLaunch);
 }
 
 function existsLaunchWithId (launchId: number) {
