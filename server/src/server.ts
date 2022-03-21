@@ -17,6 +17,8 @@ const startServer = async () => {
     msg === "success" && server.listen(PORT, () => {
         console.log(`listening on port ${PORT}...`);
     });
+
+
 };
 
 // setup mongoose listeners

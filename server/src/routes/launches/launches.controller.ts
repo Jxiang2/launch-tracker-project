@@ -7,7 +7,7 @@ async function httpGetAllLaunches (req: Request, res: Response) {
     return res.status(200).json(launches);
 };
 
-function httpAddNewLaunch (req: Request, res: Response) {
+async function httpAddNewLaunch (req: Request, res: Response) {
     const launch: LaunchInput = req.body;
     if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target) {
         return res.status(400).json({
@@ -22,8 +22,8 @@ function httpAddNewLaunch (req: Request, res: Response) {
         });
     }
 
-    addNewLaunch(launch);
-    return res.status(201).json(launch);
+    const addedLaunch = await addNewLaunch(launch);
+    return res.status(201).json(addedLaunch);
 }
 
 function httpAbortLaunch (req: Request, res: Response) {

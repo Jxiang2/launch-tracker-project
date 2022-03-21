@@ -3,21 +3,21 @@ import planetsMongo from "./planets.mongo";
 import { Launch, LaunchInput } from "../interfaces/Launches";
 
 const DEFAULT_FLIGHT_NUMBER = 100;
-
-let launch1: Launch = {
-    flightNumber: 100,
-    mission: "Kepler Exploration X",
-    rocket: "Explorer IS1",
-    launchDate: new Date("December 27, 2030"),
-    target: "Kepler-442 b",
-    customers: ["ZTM", "NASA"],
-    upcoming: true,
-    success: true
-};
-saveLaunch(launch1);
-
 const launches = new Map<number, Launch>();
-// launches.set(launch1.flightNumber, launch1);
+
+function addFirstExampleLaunch () {
+    const DEFAULT_LAUNCH: Launch = {
+        flightNumber: 100,
+        mission: "First Example Mission",
+        rocket: "Explorer 101",
+        launchDate: new Date("December 27, 2030"),
+        target: "Kepler-442 b",
+        customers: ["1", "2"],
+        upcoming: true,
+        success: true
+    };
+    saveLaunch(DEFAULT_LAUNCH);
+}
 
 async function getAllLaunches () {
     const launches = await launchesMongo
@@ -46,8 +46,9 @@ async function saveLaunch (launch: Launch) {
     if (!planet)
         throw new Error("No Matching Planet Found");
 
+    // flightNumber exists ? update current launch : create new launch
     await launchesMongo.updateOne({
-        flightNumber: launch1.flightNumber
+        flightNumber: launch.flightNumber
     }, launch, {
         upsert: true
     });
@@ -56,15 +57,18 @@ async function saveLaunch (launch: Launch) {
 async function addNewLaunch (launchInput: LaunchInput) {
     const newFlightNumber = await getLatestFlightNumber() + 1;
 
-    const newLaunch = {
-        ...launchInput,
-        flightNumber: newFlightNumber,
-        upcoming: true,
-        customers: ["ZTM", "NASA"],
-        success: true
-    };
+    const newLaunch = Object.assign(
+        launchInput,
+        {
+            flightNumber: newFlightNumber,
+            upcoming: true,
+            customers: ["ZTM", "NASA"],
+            success: true
+        }
+    );
 
     await saveLaunch(newLaunch);
+    return newLaunch;
 }
 
 function existsLaunchWithId (launchId: number) {
@@ -80,10 +84,10 @@ function abortLaunchById (launchId: number) {
     return aborted;
 }
 
+addFirstExampleLaunch();
 export {
     getAllLaunches,
     addNewLaunch,
     existsLaunchWithId,
-    abortLaunchById,
-    LaunchInput
+    abortLaunchById
 };

@@ -51,7 +51,9 @@ async function savePlanet<T extends PlanetFromCsv> (planet: T) {
 }
 
 async function getAllPlanets () {
-	return await planetsMongo.find({});
+	return await planetsMongo.find({}, {
+		"_id": 0, "__v": 0
+	});
 }
 
 export { getAllPlanets, loadPlanetData };
