@@ -1,4 +1,4 @@
-import { abort } from "process";
+import launchesMongo from "./launches.mongo";
 import { Launch, LaunchInput } from "../interfaces/Launches";
 
 let LAST_FLIGHT_NUMBER = 100;

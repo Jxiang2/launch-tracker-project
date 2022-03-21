@@ -38,3 +38,6 @@ const launchesSchema = new mongoose.Schema<Launch>({
         required: true
     },
 });
+
+// Connect launchChema with the "launches" collection
+export default mongoose.model("Launch", launchesSchema);

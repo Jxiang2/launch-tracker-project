@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { getAllPlanets } from "../../models/planets.model";
 
-function httpgetAllPlanets (req: Request, res: Response) {
-    return res.status(200).json(getAllPlanets());
+async function httpgetAllPlanets (req: Request, res: Response) {
+    const planets = await getAllPlanets();
+    return res.status(200).json(planets);
 };
 
 export {
