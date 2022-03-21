@@ -1,8 +1,7 @@
-import planetsMongo from "./planets.mongo";
-import { parse, Parser } from "csv-parse";
-import path from "path";
 import fs from "fs";
-
+import path from "path";
+import { parse, Parser } from "csv-parse";
+import planetsMongo from "./planets.mongo";
 import { Planet, PlanetFromCsv } from "../interfaces/Planets";
 
 function isHabitablePlanet<T extends Planet> (planet: T) {
@@ -20,15 +19,8 @@ function loadPlanetData () {
 			.pipe(parse({ comment: "#", columns: true }));
 
 		data
-			.on("data", async (data) => {
-				if (isHabitablePlanet(data)) {
-					savePlanet(data);
-				}
-			})
-			.on("error", (err) => {
-				console.log(err.message);
-				reject(err);
-			})
+			.on("data", async (data) => (isHabitablePlanet(data)) && savePlanet(data))
+			.on("error", (err) => reject(err))
 			.on("end", async () => {
 				const countPlanetsFound = await planetsMongo.countDocuments({});
 				console.log(`${countPlanetsFound} results found!`);
