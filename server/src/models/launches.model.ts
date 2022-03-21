@@ -47,7 +47,7 @@ async function saveLaunch (launch: Launch) {
         throw new Error("No Matching Planet Found");
 
     // flightNumber exists ? update current launch : create new launch
-    await launchesMongo.updateOne({
+    await launchesMongo.findOneAndUpdate({
         flightNumber: launch.flightNumber
     }, launch, {
         upsert: true
