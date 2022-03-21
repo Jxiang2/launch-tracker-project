@@ -19,8 +19,11 @@ function loadPlanetData () {
 			.pipe(parse({ comment: "#", columns: true }));
 
 		data
-			.on("data", async (data) => (isHabitablePlanet(data)) && savePlanet(data))
-			.on("error", (err) => reject(err))
+			.on("data", (data) => (isHabitablePlanet(data)) && savePlanet(data))
+			.on("error", (err) => {
+				console.log(err);
+				reject(err);
+			})
 			.on("end", async () => {
 				const countPlanetsFound = await planetsMongo.countDocuments({});
 				console.log(`${countPlanetsFound} results found!`);
