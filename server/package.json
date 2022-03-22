@@ -22,6 +22,7 @@
     "pm2": "^5.2.0"
   },
   "jest": {
+    "tesEnvironment": "node",
     "moduleFileExtensions": [
       "ts",
       "tsx",
