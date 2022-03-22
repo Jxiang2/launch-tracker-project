@@ -3,7 +3,6 @@ import planetsMongo from "./planets.mongo";
 import { Launch, LaunchInput } from "../interfaces/Launches";
 
 const DEFAULT_FLIGHT_NUMBER = 100;
-const launches = new Map<number, Launch>();
 
 function addFirstExampleLaunch () {
     const DEFAULT_LAUNCH: Launch = {
@@ -71,17 +70,23 @@ async function addNewLaunch (launchInput: LaunchInput) {
     return newLaunch;
 }
 
-function existsLaunchWithId (launchId: number) {
-    return launches.has(launchId);
+async function existsLaunchWithId (launchId: number) {
+    const launchDoc = await launchesMongo.findOne({
+        flightNumber: launchId
+    });
+
+    return launchDoc;
 }
 
-function abortLaunchById (launchId: number) {
-    const aborted = launches.get(launchId);
-    if (aborted) {
-        aborted.upcoming = false;
-        aborted.success = false;
-    }
-    return aborted;
+async function abortLaunchById (launchId: number) {
+    const aborted = await launchesMongo.updateOne({
+        flightNumber: launchId
+    }, {
+        upcoming: false,
+        success: false
+    });
+
+    return aborted.modifiedCount === 1;
 }
 
 addFirstExampleLaunch();
