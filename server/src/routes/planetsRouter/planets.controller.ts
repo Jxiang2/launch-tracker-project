@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllPlanets } from "../../models/planets.model";
+import { getAllPlanets } from "../../models/planetsModel/planets.model";
 
 async function httpgetAllPlanets (req: Request, res: Response) {
     const planets = await getAllPlanets();

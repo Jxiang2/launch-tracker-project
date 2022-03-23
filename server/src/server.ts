@@ -1,6 +1,6 @@
 import http from "http";
 import { app } from "./app";
-import { loadPlanetData } from "./models/planets.model";
+import { loadPlanetData } from "./models/planetsModel/planets.model";
 import { connectMongoDB } from "./mongo";
 
 const PORT = process.env.PORT || 8000;

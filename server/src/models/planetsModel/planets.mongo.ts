@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Planet } from "../interfaces/Planets";
+import { Planet } from "../../interfaces/Planets";
 
 const planetSchema = new mongoose.Schema<Planet>({
     keplerName: {

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { parse, Parser } from "csv-parse";
 import planetsMongo from "./planets.mongo";
-import { Planet, PlanetFromCsv } from "../interfaces/Planets";
+import { Planet, PlanetFromCsv } from "../../interfaces/Planets";
 
 function isHabitablePlanet<T extends Planet> (planet: T) {
 	return (

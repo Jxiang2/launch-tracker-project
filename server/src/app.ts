@@ -4,8 +4,8 @@ import cors from "cors";
 import path from "path";
 
 // routers
-import { planetRouter } from "./routes/planets/planets.router";
-import { launchRouter } from "./routes/launches/launches.router";
+import { planetRouter } from "./routes/planetsRouter/planets.router";
+import { launchRouter } from "./routes/launchesRouter/launches.router";
 
 const app: express.Application = express();
 

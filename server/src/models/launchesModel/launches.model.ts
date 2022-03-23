@@ -1,6 +1,6 @@
 import launchesMongo from "./launches.mongo";
-import planetsMongo from "./planets.mongo";
-import { Launch, LaunchInput } from "../interfaces/Launches";
+import planetsMongo from "../planetsModel/planets.mongo";
+import { Launch, LaunchInput } from "../../interfaces/Launches";
 
 const DEFAULT_FLIGHT_NUMBER: number = 100;
 

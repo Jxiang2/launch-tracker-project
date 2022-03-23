@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Launch } from "../interfaces/Launches";
+import { Launch } from "../../interfaces/Launches";
 
 const launchesSchema = new mongoose.Schema<Launch>({
     flightNumber: {
