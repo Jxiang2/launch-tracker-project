@@ -3,13 +3,13 @@ import launchesMongo from "./launches.mongo";
 import planetsMongo from "../planetsModel/planets.mongo";
 import { Launch, LaunchInput } from "../../interfaces/Launches";
 
-const DEFAULT_FLIGHT_NUMBER: number = 100;
+const DEFAULT_FLIGHT_NUMBER: number = 1000;
 const SPACE_X_URL = "https://api.spacexdata.com/v4/launches/query";
 
 
-function addFirstExampleLaunch () {
+async function addFirstExampleLaunch () {
     const DEFAULT_LAUNCH: Launch = {
-        flightNumber: 100,
+        flightNumber: 1000,
         mission: "First Example Mission",
         rocket: "Explorer 101",
         launchDate: new Date("December 27, 2030"),
@@ -18,7 +18,7 @@ function addFirstExampleLaunch () {
         upcoming: true,
         success: true
     };
-    saveLaunch(DEFAULT_LAUNCH);
+    await saveLaunch(DEFAULT_LAUNCH);
 }
 
 
