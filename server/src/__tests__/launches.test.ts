@@ -1,74 +1,90 @@
 import { app } from "../app";
 import request from "supertest";
+import { connectMongoDB, disconnectMongoDB } from "../mongo";
 
-describe('Test GET /launches', () => {
-    test('It should respond with 200 success', async () => {
-        await request(app)
-            .get('/launches')
-            .expect(200);
-    });
-});
+describe("Launches API", () => {
+    beforeAll(async () => {
+        await connectMongoDB();
+        console.log("Connected to test mongoDB");
 
-describe('Test POST /launches', () => {
-
-    const launchDataWithInvalidDate = {
-        mission: "USS Enterprise",
-        rocket: "NCC 1701-D",
-        target: "Kepler-186 f",
-        launchDate: "jxx 4, 202x8"
-    };
-
-    const completeLaunchData = {
-        mission: "USS Enterprise",
-        rocket: "NCC 1701-D",
-        target: "Kepler-186 f",
-        launchDate: "january 4, 2028"
-    };
-
-    const launchDataWithoutDate = {
-        mission: "USS Enterprise",
-        rocket: "NCC 1701-D",
-        target: "Kepler-186 f",
-    };
-
-    test('It should respond with 200 success', async () => {
-        const res = await request(app)
-            .post('/launches')
-            .send(completeLaunchData)
-            .expect('Content-Type', /json/)
-            .expect(201);
-
-        const requestDate = new Date(completeLaunchData.launchDate).valueOf();
-        const resDate = new Date(res.body.launchDate).valueOf();
-        expect(requestDate).toBe(resDate);
-        // match a subset is enough
-        expect(res.body).toMatchObject(launchDataWithoutDate);
     });
 
-    test('It should catch missing required properties', async () => {
-        const res = await request(app)
-            .post('/launches')
-            .send(launchDataWithoutDate)
-            .expect('Content-Type', /json/)
-            .expect(400);
+    afterAll(async () => {
+        await disconnectMongoDB();
+        console.log("Disconnted to test mongoDB");
 
-        // strictly match every properties
-        expect(res.body).toStrictEqual({
-            error: "Missing required launch property"
+    });
+
+    describe('Test GET /launches', () => {
+        test('It should respond with 200 success', async () => {
+            await request(app)
+                .get('/launches')
+                .expect(200);
         });
     });
 
-    test('It should catch invalid dates', async () => {
-        const res = await request(app)
-            .post('/launches')
-            .send(launchDataWithInvalidDate)
-            .expect('Content-Type', /json/)
-            .expect(400);
+    describe('Test POST /launches', () => {
+        const launchDataWithInvalidDate = {
+            mission: "USS Enterprise",
+            rocket: "NCC 1701-D",
+            target: "Kepler-62 f",
+            launchDate: "jxx 4, 202x8"
+        };
 
-        // strictly match every properties
-        expect(res.body).toStrictEqual({
-            error: "Invalid launch date"
+        const completeLaunchData = {
+            mission: "USS Enterprise",
+            rocket: "NCC 1701-D",
+            target: "Kepler-62 f",
+            launchDate: "january 4, 2028"
+        };
+
+        const launchDataWithoutDate = {
+            mission: "USS Enterprise",
+            rocket: "NCC 1701-D",
+            target: "Kepler-62 f",
+        };
+
+        test('It should respond with 201 created', async () => {
+            const res = await request(app)
+                .post('/launches')
+                .send(completeLaunchData)
+                .expect('Content-Type', /json/)
+                .expect(201);
+
+            const requestDate = new Date(completeLaunchData.launchDate).valueOf();
+            const resDate = new Date(res.body.launchDate).valueOf();
+            expect(requestDate).toBe(resDate);
+            // match a subset is enough
+            expect(res.body).toMatchObject(launchDataWithoutDate);
+        });
+
+        test('It should catch missing required properties', async () => {
+            const res = await request(app)
+                .post('/launches')
+                .send(launchDataWithoutDate)
+                .expect('Content-Type', /json/)
+                .expect(400);
+
+            // strictly match every properties
+            expect(res.body).toStrictEqual({
+                error: "Missing required launch property"
+            });
+        });
+
+        test('It should catch invalid dates', async () => {
+            const res = await request(app)
+                .post('/launches')
+                .send(launchDataWithInvalidDate)
+                .expect('Content-Type', /json/)
+                .expect(400);
+
+            // strictly match every properties
+            expect(res.body).toStrictEqual({
+                error: "Invalid launch date"
+            });
         });
     });
 });
+
+
 

@@ -1,31 +1,25 @@
 import http from "http";
-import mongoose from "mongoose";
 import { app } from "./app";
 import { loadPlanetData } from "./models/planets.model";
+import { connectMongoDB } from "./mongo";
 
 const PORT = process.env.PORT || 8000;
-const MONGO_URL = "mongodb+srv://nasa-api:wWerad8lEAXOUeT7@cluster0.qe704.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const server: http.Server = http.createServer(app);
 
-const startServer = async () => {
+async function startServer () {
     // connect to MongoDB
-    await mongoose.connect(MONGO_URL);
+    await connectMongoDB();
 
-    // start server after successfully load data
+    // load data from csv file
     const msg = await loadPlanetData();
-    msg === "success" && server.listen(PORT, () => {
-        console.log(`listening on port ${PORT}...`);
-    });
 
-
+    // start to listen on Port 8000...
+    msg === "success" && server.listen(PORT, () =>
+        console.log(`listening on port ${PORT}...`)
+    );
 };
 
-// setup mongoose listeners
-mongoose.connection.once('open', () => console.log('MongoDB connection ready'));
-mongoose.connection.on('error', (err) => console.error(err));
-
-// start server
 startServer();
 
 
