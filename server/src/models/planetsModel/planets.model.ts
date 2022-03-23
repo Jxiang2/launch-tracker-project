@@ -15,7 +15,7 @@ function isHabitablePlanet<T extends Planet> (planet: T) {
 
 function loadPlanetData () {
 	return new Promise((resolve, reject) => {
-		const data: Parser = fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
+		const data: Parser = fs.createReadStream(path.join(__dirname, '..', '..', '..', 'data', 'kepler_data.csv'))
 			.pipe(parse({ comment: "#", columns: true }));
 
 		data
