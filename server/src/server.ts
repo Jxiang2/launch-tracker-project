@@ -1,6 +1,7 @@
 import http from "http";
 import { app } from "./app";
 import { loadPlanetData } from "./models/planetsModel/planets.model";
+import { loadSpaceXLaunchData } from "./models/launchesModel/launches.model";
 import { connectMongoDB } from "./mongo";
 
 const PORT = process.env.PORT || 8000;
@@ -13,6 +14,9 @@ async function startServer () {
 
     // load data from csv file
     const msg = await loadPlanetData();
+
+    // load spaceX API data
+    await loadSpaceXLaunchData();
 
     // start to listen on Port 8000...
     msg === "success" && server.listen(PORT, () =>

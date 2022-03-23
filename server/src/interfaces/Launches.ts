@@ -3,7 +3,7 @@ interface Launch {
     mission: string;
     rocket: string;
     launchDate: Date;
-    target: string;
+    target?: string;
     customers: string[];
     upcoming: boolean;
     success: boolean;
