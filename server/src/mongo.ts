@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const MONGO_URL = "mongodb+srv://nasa-api:wWerad8lEAXOUeT7@cluster0.qe704.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 // setup mongoose listeners
-mongoose.connection.once('open', () => console.log('MongoDB connection ready'));
+mongoose.connection.once('open', () => console.log('mongoDB connection ready'));
 mongoose.connection.on('error', (err) => console.error(err));
 
 

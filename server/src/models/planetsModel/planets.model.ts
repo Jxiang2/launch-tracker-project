@@ -14,7 +14,6 @@ function isHabitablePlanet<T extends Planet> (planet: T) {
 	);
 };
 
-
 function loadPlanetData () {
 	return new Promise((resolve, reject) => {
 		const data: Parser = fs.createReadStream(path.join(__dirname, '..', '..', '..', 'data', 'kepler_data.csv'))
@@ -26,14 +25,9 @@ function loadPlanetData () {
 				console.log(err);
 				reject(err);
 			})
-			.on("end", async () => {
-				const countPlanetsFound = await planetsMongo.countDocuments({});
-				console.log(`${countPlanetsFound} results found!`);
-				resolve("success");
-			});
+			.on("end", async () => resolve("success"));
 	});
 };
-
 
 async function savePlanet<T extends PlanetFromCsv> (planet: T) {
 	try {
@@ -53,12 +47,10 @@ async function savePlanet<T extends PlanetFromCsv> (planet: T) {
 	}
 }
 
-
 async function getAllPlanets () {
 	return await planetsMongo.find({}, {
 		"_id": 0, "__v": 0
 	});
 }
-
 
 export { getAllPlanets, loadPlanetData };

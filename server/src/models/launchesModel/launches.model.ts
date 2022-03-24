@@ -21,7 +21,6 @@ async function addFirstExampleLaunch () {
     await saveLaunch(DEFAULT_LAUNCH);
 }
 
-
 async function loadSpaceXLaunchData () {
     const firstLaunch = await findLaunchInDB({
         flightNumber: 1,
@@ -30,13 +29,12 @@ async function loadSpaceXLaunchData () {
     });
 
     if (firstLaunch) {
-        console.log("Launch data already loaded");
+        console.log("launch data already loaded");
     } else {
         await populateLaunches();
         console.log("Launch data successfully loaded");
     }
 }
-
 
 async function populateLaunches () {
     console.log("Downloading launch data...");
@@ -77,7 +75,6 @@ async function populateLaunches () {
     }
 }
 
-
 async function getAllLaunches () {
     const launches = await launchesMongo
         .find({}, {
@@ -85,7 +82,6 @@ async function getAllLaunches () {
         });
     return launches;
 }
-
 
 async function getLatestFlightNumber () {
     const latestLaunch = await launchesMongo
@@ -98,7 +94,6 @@ async function getLatestFlightNumber () {
     return latestLaunch.flightNumber;
 }
 
-
 async function saveLaunch (launch: Launch) {
     await launchesMongo.findOneAndUpdate({
         flightNumber: launch.flightNumber
@@ -106,7 +101,6 @@ async function saveLaunch (launch: Launch) {
         upsert: true
     });
 }
-
 
 async function addNewLaunch (launchInput: LaunchInput) {
     const planet = await planetsMongo.findOne({
@@ -132,11 +126,9 @@ async function addNewLaunch (launchInput: LaunchInput) {
     return newLaunch;
 }
 
-
 async function findLaunchInDB<T extends { flightNumber: Number; }> (filter: T) {
     return await launchesMongo.findOne(filter);
 }
-
 
 async function existsLaunchWithId (launchId: number) {
     const launchDoc = await findLaunchInDB({
@@ -145,7 +137,6 @@ async function existsLaunchWithId (launchId: number) {
 
     return launchDoc;
 }
-
 
 async function abortLaunchById (launchId: number) {
     const aborted = await launchesMongo.updateOne({
@@ -158,13 +149,8 @@ async function abortLaunchById (launchId: number) {
     return aborted.modifiedCount === 1;
 }
 
-
 // always add an example lauch if the launch collection is empty
-addFirstExampleLaunch().then(() => {
-    console.log("First example added or updated!");
-});
-console.log("before first example added");
-
+addFirstExampleLaunch();
 
 export {
     getAllLaunches,
