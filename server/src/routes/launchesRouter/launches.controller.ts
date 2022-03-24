@@ -1,9 +1,11 @@
+import applyPaginator from "../../query";
 import { LaunchInput } from "../../interfaces/Launches";
 import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/launchesModel/launches.model";
 import { Request, Response } from "express";
 
 async function httpGetAllLaunches (req: Request, res: Response) {
-    const launches = await getAllLaunches();
+    const { skip, limit } = applyPaginator(req.query);
+    const launches = await getAllLaunches(skip, limit);
     return res.status(200).json(launches);
 };
 

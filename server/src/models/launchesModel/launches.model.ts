@@ -75,11 +75,11 @@ async function populateLaunches () {
     }
 }
 
-async function getAllLaunches () {
+async function getAllLaunches (skip: number, limit: number) {
     const launches = await launchesMongo
-        .find({}, {
-            "_id": 0, "__v": 0
-        });
+        .find({}, { "_id": 0, "__v": 0 })
+        .skip(skip)
+        .limit(limit);
     return launches;
 }
 
