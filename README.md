@@ -18,10 +18,18 @@ Database: MongoDB
 Deployment: Docker, AWS
 
 ## build project
-build without cluster
-cd launch-tracker-project
-npm run deploy
+_build without cluster_
 
-build with cluster
+```
 cd launch-tracker-project
+
+npm run deploy
+```
+
+_build with cluster_
+
+```
+cd launch-tracker-project
+
 npm run deploy-cluster
+```
