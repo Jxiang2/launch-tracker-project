@@ -16,3 +16,12 @@ Server side: Express, TypeScript
 Database: MongoDB
 
 Deployment: Docker, AWS
+
+## build project
+build without cluster
+cd launch-tracker-project
+npm run deploy
+
+build with cluster
+cd launch-tracker-project
+npm run deploy-cluster
