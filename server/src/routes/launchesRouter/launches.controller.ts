@@ -1,4 +1,4 @@
-import applyPaginator from "../../query";
+import applyPaginator from "../../utils/query";
 import { LaunchInput } from "../../interfaces/Launches";
 import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/launchesModel/launches.model";
 import { Request, Response } from "express";

@@ -1,6 +1,6 @@
 import { app } from "../app";
 import request from "supertest";
-import { connectMongoDB, disconnectMongoDB } from "../mongo";
+import { connectMongoDB, disconnectMongoDB } from "../utils/mongo";
 
 describe("Launches API", () => {
     beforeAll(async () => {

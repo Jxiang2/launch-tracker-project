@@ -3,7 +3,7 @@ import http from "http";
 import { app } from "./app";
 import { loadPlanetData } from "./models/planetsModel/planets.model";
 import { loadSpaceXLaunchData } from "./models/launchesModel/launches.model";
-import { connectMongoDB } from "./mongo";
+import { connectMongoDB } from "./utils/mongo";
 
 const PORT = process.env.PORT || 8000;
 
