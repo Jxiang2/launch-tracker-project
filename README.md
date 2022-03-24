@@ -1,4 +1,4 @@
-# ts-nasa-project
+# launch-tracker-project
 
 This project amis to practice full-stack nodejs development
 
