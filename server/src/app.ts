@@ -27,7 +27,10 @@ app.use('/planets', planetRouter);
 app.use('/launches', launchRouter);
 
 // if express can't find a route, react will take over it 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "dist", "client", "index.html"));
-});
+setTimeout(() => {
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "dist", "client", "index.html"));
+  });
+}, 1000);
+
 export { app };

@@ -45,6 +45,7 @@ function useLaunches (onSuccessSound, onAbortSound, onFailureSound) {
     const success = response.ok;
     if (success) {
       getLaunches();
+      getUpCommingLaunches();
       setTimeout(() => {
         setPendingLaunch(false);
         onSuccessSound();
@@ -52,18 +53,19 @@ function useLaunches (onSuccessSound, onAbortSound, onFailureSound) {
     } else {
       onFailureSound();
     }
-  }, [getLaunches, onSuccessSound, onFailureSound]);
+  }, [getLaunches, getUpCommingLaunches, onSuccessSound, onFailureSound]);
 
   const abortLaunch = useCallback(async (id) => {
     const response = await httpAbortLaunch(id);
     const success = response.ok;
     if (success) {
       getLaunches();
+      getUpCommingLaunches();
       onAbortSound();
     } else {
       onFailureSound();
     }
-  }, [getLaunches, onAbortSound, onFailureSound]);
+  }, [getLaunches, getUpCommingLaunches, onAbortSound, onFailureSound]);
 
   return {
     launches,
