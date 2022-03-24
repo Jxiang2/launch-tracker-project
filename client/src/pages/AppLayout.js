@@ -53,6 +53,7 @@ const AppLayout = props => {
 
   const {
     launches,
+    upCommingLaunches,
     isPendingLaunch,
     submitLaunch,
     abortLaunch,
@@ -87,7 +88,7 @@ const AppLayout = props => {
               <Route exact path="/upcoming">
                 <Upcoming
                   entered={ anim.entered }
-                  launches={ launches }
+                  launches={ upCommingLaunches }
                   abortLaunch={ abortLaunch } />
               </Route>
               <Route exact path="/history">

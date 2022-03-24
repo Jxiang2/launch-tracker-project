@@ -15,6 +15,15 @@ async function httpGetLaunches () {
   });
 }
 
+async function httpGetUpcommingLaunches () {
+  // Load launches, sort by flight number, and return as JSON.
+  const response = await fetch(`${BASE_URL}/launches/upcomming`);
+  const fetched = await response.json();
+  return fetched.sort((a, b) => {
+    return a.flightNumber - b.flightNumber;
+  });
+}
+
 async function httpSubmitLaunch (launch) {
   // Submit given launch data to launch system.
 
@@ -50,6 +59,7 @@ async function httpAbortLaunch (id) {
 export {
   httpGetPlanets,
   httpGetLaunches,
+  httpGetUpcommingLaunches,
   httpSubmitLaunch,
   httpAbortLaunch,
 };

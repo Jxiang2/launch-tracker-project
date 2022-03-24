@@ -1,6 +1,12 @@
 import applyPaginator from "../../utils/query";
 import { LaunchInput } from "../../interfaces/Launches";
-import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } from "../../models/launchesModel/launches.model";
+import {
+    getAllLaunches,
+    addNewLaunch,
+    existsLaunchWithId,
+    abortLaunchById,
+    getUpcommingLaunches
+} from "../../models/launchesModel/launches.model";
 import { Request, Response } from "express";
 
 async function httpGetAllLaunches (req: Request, res: Response) {
@@ -8,6 +14,11 @@ async function httpGetAllLaunches (req: Request, res: Response) {
     const launches = await getAllLaunches(docsToSkip, pageLimit);
     return res.status(200).json(launches);
 };
+
+async function httpGetUpcommingLaunches (req: Request, res: Response) {
+    const launches = await getUpcommingLaunches();
+    return res.status(200).json(launches);
+}
 
 async function httpAddNewLaunch (req: Request, res: Response) {
     const launch: LaunchInput = req.body;
@@ -52,6 +63,7 @@ async function httpAbortLaunch (req: Request, res: Response) {
 
 export {
     httpGetAllLaunches,
+    httpGetUpcommingLaunches,
     httpAddNewLaunch,
     httpAbortLaunch
 };

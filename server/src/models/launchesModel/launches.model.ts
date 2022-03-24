@@ -84,6 +84,13 @@ async function getAllLaunches (skip: number, limit: number) {
     return launches;
 }
 
+async function getUpcommingLaunches () {
+    const upcommingLaunches = await launchesMongo
+        .find({ upcoming: true }, { "_id": 0, "__v": 0 })
+        .sort({ flightNumber: 1 });
+    return upcommingLaunches;
+}
+
 async function getLatestFlightNumber () {
     const latestLaunch = await launchesMongo
         .findOne()
@@ -158,5 +165,6 @@ export {
     addNewLaunch,
     existsLaunchWithId,
     abortLaunchById,
-    loadSpaceXLaunchData
+    loadSpaceXLaunchData,
+    getUpcommingLaunches
 };
