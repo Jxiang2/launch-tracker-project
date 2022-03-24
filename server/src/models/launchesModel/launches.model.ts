@@ -158,11 +158,13 @@ async function abortLaunchById (launchId: number) {
     return aborted.modifiedCount === 1;
 }
 
+
 // always add an example lauch if the launch collection is empty
 addFirstExampleLaunch().then(() => {
     console.log("First example added or updated!");
 });
 console.log("before first example added");
+
 
 export {
     getAllLaunches,

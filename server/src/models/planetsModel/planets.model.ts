@@ -4,6 +4,7 @@ import { parse, Parser } from "csv-parse";
 import planetsMongo from "./planets.mongo";
 import { Planet, PlanetFromCsv } from "../../interfaces/Planets";
 
+
 function isHabitablePlanet<T extends Planet> (planet: T) {
 	return (
 		planet["koi_disposition"] === "CONFIRMED" &&
@@ -12,6 +13,7 @@ function isHabitablePlanet<T extends Planet> (planet: T) {
 		planet["koi_prad"] < 1.6
 	);
 };
+
 
 function loadPlanetData () {
 	return new Promise((resolve, reject) => {
@@ -32,6 +34,7 @@ function loadPlanetData () {
 	});
 };
 
+
 async function savePlanet<T extends PlanetFromCsv> (planet: T) {
 	try {
 		// Filter... if document does not exist, insert a new one, else update it
@@ -50,10 +53,12 @@ async function savePlanet<T extends PlanetFromCsv> (planet: T) {
 	}
 }
 
+
 async function getAllPlanets () {
 	return await planetsMongo.find({}, {
 		"_id": 0, "__v": 0
 	});
 }
+
 
 export { getAllPlanets, loadPlanetData };
