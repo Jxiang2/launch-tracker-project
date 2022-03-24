@@ -4,8 +4,8 @@ import { getAllLaunches, addNewLaunch, existsLaunchWithId, abortLaunchById } fro
 import { Request, Response } from "express";
 
 async function httpGetAllLaunches (req: Request, res: Response) {
-    const { skip, limit } = applyPaginator(req.query);
-    const launches = await getAllLaunches(skip, limit);
+    const { skip: docsToSkip, limit: pageLimit } = applyPaginator(req.query);
+    const launches = await getAllLaunches(docsToSkip, pageLimit);
     return res.status(200).json(launches);
 };
 

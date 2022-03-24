@@ -78,6 +78,7 @@ async function populateLaunches () {
 async function getAllLaunches (skip: number, limit: number) {
     const launches = await launchesMongo
         .find({}, { "_id": 0, "__v": 0 })
+        .sort({ flightNumber: 1 })
         .skip(skip)
         .limit(limit);
     return launches;
