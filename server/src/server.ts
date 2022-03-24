@@ -1,3 +1,4 @@
+require('dotenv').config();
 import http from "http";
 import { app } from "./app";
 import { loadPlanetData } from "./models/planetsModel/planets.model";

@@ -1,6 +1,7 @@
+require('dotenv').config();
 import mongoose from "mongoose";
 
-const MONGO_URL = "mongodb+srv://nasa-api:wWerad8lEAXOUeT7@cluster0.qe704.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const MONGO_URL = process.env.MONGO_URL || "invalid url";
 
 // setup mongoose listeners
 mongoose.connection.once('open', () => console.log('mongoDB connection ready'));
