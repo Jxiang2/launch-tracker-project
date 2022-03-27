@@ -16,6 +16,5 @@ jobs:
         with: 
           node-version: '16'
 
-      - name: Run program
-        run: npm run install-all
-        run: npm run deploy
+      - run: npm run install-all
+      - run: npm run deploy
