@@ -1,0 +1,21 @@
+name: Launch Tracker CI
+on: # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build: # Job1 called build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.0
+
+      - name: Use NodeJS version 16
+        uses: actions/setup-node@v3.0.0
+        with: 
+          node-version: '16'
+
+      - name: Run program
+        run: npm run install-all
+        run: npm run deploy
