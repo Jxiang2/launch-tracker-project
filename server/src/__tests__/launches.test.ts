@@ -1,11 +1,13 @@
 import { app } from "../app";
 import request from "supertest";
 import { connectMongoDB, disconnectMongoDB } from "../utils/mongo";
+import { loadPlanetData } from "../models/planetsModel/planets.model";
 
 describe("Launches API", () => {
     beforeAll(async () => {
         await connectMongoDB();
-        console.log("Connected to test mongoDB");
+        await loadPlanetData();
+        console.log("Connected to test mongoDB and retrieved planet data");
 
     });
 

@@ -31,4 +31,5 @@ jobs:
           mongodb-version: ${{ matrix.mongodb-version }}
 
       - run: npm run install-all
-      - run: npm run deploy
+      - run: npm run build
+      - run: npm test
