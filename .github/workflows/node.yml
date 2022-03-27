@@ -8,20 +8,27 @@ on: # Triggers the workflow on push or pull request events but only for the main
 jobs:
   build: # Job1 called build
 
-    env:
-      CI: true
-    strategy:
-      matrix: # 2 build jobs run in parallel
+    env: 
+      CI: true # disable test --watch in npm scripts
+      MONGO_URL: mongodb://localhost/cidb
+    strategy: 
+      matrix:
         node-version: [14.x, 16.x]
+        mongodb-version: ['5.0']
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.0
 
-      - name: Use NodeJS version ${{ matrix.node-version }}
+      - name: Use NodeJS version ${{ matrix.node-version }} # Set up Node 14 and Node 16
         uses: actions/setup-node@v3.0.0
         with: 
           node-version: ${{ matrix.node-version }}
+
+      - name: Use MongoDB # Start a MongoDB server (on default port 27017 or a custom port)
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
 
       - run: npm run install-all
       - run: npm run deploy
