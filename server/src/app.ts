@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
@@ -28,7 +28,7 @@ app.use('/launches', launchRouter);
 
 // if express can't find a route, react will take over it 
 setTimeout(() => {
-  app.get('/*', (req, res) => {
+  app.get('/*', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "..", "dist", "client", "index.html"));
   });
 }, 1000);
