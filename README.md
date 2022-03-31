@@ -33,3 +33,19 @@ cd launch-tracker-project
 
 npm run deploy-cluster
 ```
+
+## docker build command
+```
+ docker buildx create --name m1_builder
+
+ docker buildx use m1_builder 
+
+ docker buildx inspect --bootstrap
+
+ docker buildx build --platform linux/amd64 --tag <docker username>/launch-tracker-project
+```
+
+## run docker container in EC2
+```
+docker run --restart=always --platform linux/amd64 -p 8000:8000 <docker username>/launch-tracker-project
+```
