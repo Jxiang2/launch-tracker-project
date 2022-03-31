@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "cluster": "pm2 start dist/server.js -i max",
+    "cluster": "pm2-runtime start dist/server.js -i max",
     "dev": "nodemon src/server.ts",
     "test": "jest",
     "build": "tsc -p ."

@@ -25,6 +25,6 @@ RUN npm run build --prefix server
 USER node
 
 # run server
-CMD [ "npm", "start", "--prefix", "server" ]
+CMD ["npm", "run", "cluster", "--prefix", "server"]
 
 EXPOSE 8000
