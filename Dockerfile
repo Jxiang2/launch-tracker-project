@@ -5,11 +5,11 @@ WORKDIR /app
 # ~/app/
 COPY package*.json ./
 
-# ~/app/client/
+# ~/app/client/   prevent unnecessary installs
 COPY client/package*.json client/
 RUN npm run install-client --only=production
 
-# ~/app/server/
+# ~/app/server/   prevent unnecessary installs
 COPY server/package*.json server/
 RUN npm run install-server --only=production
 
