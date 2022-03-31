@@ -18,14 +18,14 @@ Database: MongoDB
 Deployment: Docker, AWS
 
 ## build project
-build without pm2 cluster
+Build without pm2 cluster
 
 ```
 cd launch-tracker-project
 npm run deploy
 ```
 
-build with pm2 cluster
+Build with pm2 cluster
 
 ```
 cd launch-tracker-project
