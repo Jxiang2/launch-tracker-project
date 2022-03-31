@@ -1,2 +1,4 @@
-*/node_module
 .git
+
+*/node_module
+server/dist

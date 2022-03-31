@@ -2,12 +2,23 @@ FROM node:lts-alpine3.10
 
 WORKDIR /app
 
-COPY . .
+# ~/app/
+COPY package*.json ./
 
-RUN npm install --only=production
+# ~/app/client/
+COPY client/package*.json client/
+RUN npm run install-client --only=production
 
-RUN npm run build --prefix
+# ~/app/server/
+COPY server/package*.json server/
+RUN npm run install-server --only=production
 
+# ~/app/client/
+COPY client/ client/
+RUN npm run build --prefix client
+
+# ~/app/server/
+COPY server/ server/
 RUN npm run build --prefix server
 
 # run container as node user
