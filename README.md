@@ -24,20 +24,22 @@ build without pm2 cluster
 cd launch-tracker-project
 npm run deploy
 ```
-
-## build with pm2 cluster
-
+build with pm2 cluster
 ```
 cd launch-tracker-project
+
 npm run deploy-cluster
 ```
 
 ## docker build command
 ```
-docker buildx create --name m1_builder
-docker buildx use m1_builder 
-docker buildx inspect --bootstrap
-docker buildx build --platform linux/amd64 --tag <docker username>/launch-tracker-project
+ docker buildx create --name m1_builder
+
+ docker buildx use m1_builder 
+
+ docker buildx inspect --bootstrap
+
+ docker buildx build --platform linux/amd64 --tag <docker username>/launch-tracker-project
 ```
 
 ## run docker container in EC2
